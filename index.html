@@ -8,20 +8,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-primary: #db2777;
-            --pink-dark: #831843;
-            --pink-light: #fce7f3;
+            /* Baby Pink Theme Colors */
+            --pink-primary: #f472b6; /* pink-400 */
+            --pink-dark: #831843;   /* deep pink for text contrast */
+            --pink-light: #fdf2f8;  /* pink-50 - Baby Pink */
             --gold: #d4af37;
+            --accent-pink: #f9a8d4; /* pink-300 */
         }
 
         body {
             font-family: 'Noto Sans Gujarati', sans-serif;
-            background-color: var(--pink-dark);
-            color: white;
+            background-color: var(--pink-light);
+            color: var(--pink-dark);
             margin: 0;
             overflow-x: hidden;
-            /* Initially disable scroll for the cover */
             overflow-y: hidden;
+        }
+
+        /* Floating Petals Animation */
+        .petal {
+            position: fixed;
+            background-color: #f9a8d4;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.5;
+            z-index: -1;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         /* Kankotri Opening Animation */
@@ -51,52 +70,96 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #be185d 0%, #831843 100%);
-            z-index: -1;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            z-index: -2;
         }
 
         .bandhani-pattern {
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+            background-image: radial-gradient(var(--pink-primary) 1px, transparent 1px);
             background-size: 30px 30px;
-            opacity: 0.15;
+            opacity: 0.1;
             pointer-events: none;
         }
 
         .card-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 2px solid var(--gold);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--pink-primary);
             padding: 2.5rem 1.5rem;
-            border-radius: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px -10px rgba(219, 39, 119, 0.2);
+            max-width: 550px;
             width: 92%;
             border: 6px double var(--gold);
             position: relative;
-            color: #fff;
-            margin: 2rem auto;
+            color: var(--pink-dark);
+            margin: 4rem auto;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 50px -10px rgba(219, 39, 119, 0.3);
         }
 
         .nav-btn {
-            background: var(--gold);
-            color: var(--pink-dark);
-            padding: 0.7rem 2rem;
+            background: var(--pink-primary);
+            color: white;
+            padding: 0.8rem 2.5rem;
             border-radius: 9999px;
             font-weight: bold;
             transition: all 0.3s;
             font-size: 1.2rem;
             border: 2px solid white;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.4);
+            text-transform: uppercase;
         }
         
         .nav-btn:hover {
-            transform: scale(1.05);
-            background: white;
-            color: var(--pink-primary);
+            transform: scale(1.1);
+            background: var(--pink-dark);
+            box-shadow: 0 6px 20px rgba(131, 24, 67, 0.4);
+        }
+
+        /* Dulha Dulhan Animation */
+        .couple-anim {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .dulha, .dulhan {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .dulhan {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .heart-beat {
+            animation: heartBeat 1.5s infinite;
+            display: inline-block;
+            color: #ff4d6d;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
         }
 
         .ganesh-anim {
@@ -105,20 +168,20 @@
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
         .ornament-line {
-            height: 2px;
+            height: 3px;
             background: linear-gradient(to right, transparent, var(--gold), transparent);
-            margin: 15px auto;
-            width: 80%;
+            margin: 20px auto;
+            width: 70%;
         }
 
         .reveal-section {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .reveal-section.visible {
@@ -129,18 +192,52 @@
         .serif-font {
             font-family: 'Playfair Display', serif;
         }
+
+        /* Traditional Side Border Pattern */
+        .side-pattern {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            opacity: 0.15;
+            background-image: repeating-linear-gradient(45deg, var(--gold), var(--gold) 5px, transparent 5px, transparent 10px);
+        }
+        .left-pattern { left: 10px; }
+        .right-pattern { right: 10px; }
+
+        .schedule-item {
+            background: var(--pink-light);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-pink);
+            transition: all 0.3s;
+        }
+        .schedule-item:hover {
+            background: white;
+            border-color: var(--pink-primary);
+        }
+
     </style>
 </head>
 <body>
 
+    <!-- Floating Background Petals -->
+    <div id="petal-container"></div>
+
     <!-- Kankotri Opening Screen -->
     <div id="kankotri-cover">
         <div class="bandhani-pattern"></div>
-        <div class="z-10 text-center p-8 border-4 border-white rounded-2xl m-4 shadow-2xl bg-pink-800/90 max-w-sm">
+        <div class="z-10 text-center p-10 border-4 border-white rounded-3xl m-4 shadow-2xl bg-white/95 max-w-sm relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-100 rounded-full"></div>
             <div class="text-7xl mb-6 ganesh-anim">🕉️</div>
-            <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">શુભ લગ્ન નિમંત્રણ</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-pink-700 mb-2">શુભ લગ્ન નિમંત્રણ</h1>
             <div class="ornament-line"></div>
-            <p class="text-pink-100 text-xl mb-8 italic">ચિ. આશિષ & ચિ. ક્વિના</p>
+            <div class="couple-anim">
+                <span class="dulha">🤵</span>
+                <span class="heart-beat text-2xl">❤️</span>
+                <span class="dulhan">👰</span>
+            </div>
+            <p class="text-pink-500 text-xl mb-8 italic">ચિ. આશિષ & ચિ. ક્વિના</p>
             <button onclick="openKankotri()" class="nav-btn">
                 કંકોતરી ખોલો ✉️
             </button>
@@ -157,61 +254,84 @@
         
         <!-- Welcome Section -->
         <section class="reveal-section card-container">
-            <p class="text-gold font-bold mb-1">।। જય શ્રી મહાકાળી માઁ ।।</p>
-            <p class="text-gold font-bold mb-4">|| જય રણછોડરાય ||</p>
-            <div class="text-5xl mb-4">🌺</div>
-            <h2 class="text-xl text-pink-200 mb-1">મંગલ પરિણય</h2>
-            <h1 class="text-4xl md:text-6xl font-bold text-white my-4 serif-font">આશિષ <br><span class="text-gold">&</span><br> ક્વિના</h1>
-            <div class="ornament-line"></div>
-            <p class="text-xl text-gold mt-2 font-semibold italic">રવિવાર, ૨૨ ફેબ્રુઆરી ૨૦૨૬</p>
-            <p class="text-pink-100 mt-2">ગામ કોયલી - પોરબંદર</p>
+            <div class="side-pattern left-pattern"></div>
+            <div class="side-pattern right-pattern"></div>
+            
+            <p class="text-pink-600 font-bold mb-1">।। જય શ્રી મહાકાળી માઁ ।।</p>
+            <p class="text-pink-600 font-bold mb-4">|| જય રણછોડરાય ||</p>
+            
+            <div class="text-5xl mb-4">✨</div>
+            
+            <h2 class="text-xl text-pink-400 mb-1">મંગલ પરિણય</h2>
+            
+            <div class="flex items-center justify-center gap-4 my-6">
+                <div class="h-[1px] bg-pink-300 flex-grow opacity-50"></div>
+                <h1 class="text-4xl md:text-7xl font-bold text-pink-800 serif-font px-4">આશિષ <span class="heart-beat">❤️</span> ક્વિના</h1>
+                <div class="h-[1px] bg-pink-300 flex-grow opacity-50"></div>
+            </div>
+            
+            <div class="couple-anim my-8">
+                <div class="text-6xl dulha">🤴</div>
+                <div class="text-3xl self-center text-pink-500 font-serif">weds</div>
+                <div class="text-6xl dulhan">👸</div>
+            </div>
+
+            <p class="text-2xl text-pink-700 mt-2 font-semibold italic tracking-widest">રવિવાર, ૨૨ ફેબ્રુઆરી ૨૦૨૬</p>
+            <p class="text-pink-500 mt-2 text-lg">ગામ કોયલી - પોરબંદર</p>
         </section>
 
         <!-- Details Section -->
         <section class="reveal-section card-container">
-            <p class="italic text-pink-200 text-sm mb-6">લિ. પટેલ અશોકભાઈ વિઠ્ઠલભાઈ ના જય રણછોડજી વાંચશોજી.</p>
-            <div class="space-y-6 text-lg">
+            <p class="italic text-pink-500 text-sm mb-6 border-b border-pink-100 pb-4">લિ. પટેલ અશોકભાઈ વિઠ્ઠલભાઈ ના જય રણછોડજી વાંચશોજી.</p>
+            <div class="space-y-6 text-xl">
                 <p class="leading-relaxed">મહાકાળી માતાજી ની અસીમ કૃપાથી અમારા નાનાભાઇ <br>
-                <span class="font-bold text-gold text-2xl">શ્રી પટેલ રમણભાઇ વિઠ્ઠલભાઈ</span> <br>
+                <span class="font-bold text-pink-800 text-3xl">શ્રી પટેલ રમણભાઇ વિઠ્ઠલભાઈ</span> <br>
                 તથા <br>
-                <span class="font-bold text-gold text-2xl">પટેલ જ્યોતિકાબેન રમણભાઈ</span> <br>
+                <span class="font-bold text-pink-800 text-3xl">પટેલ જ્યોતિકાબેન રમણભાઈ</span> <br>
                 ના સુપુત્ર</p>
                 
-                <h3 class="text-4xl font-bold border-y-2 border-gold/40 py-4 my-6 bg-white/5">ચિ. આશિષકુમાર</h3>
+                <div class="relative py-4">
+                   <div class="absolute inset-0 bg-pink-100 blur-xl rounded-full opacity-50"></div>
+                   <h3 class="text-4xl md:text-5xl font-bold border-y-2 border-pink-200 py-6 my-6 bg-white/40 relative z-10 serif-font text-pink-900">ચિ. આશિષકુમાર</h3>
+                </div>
                 
-                <p class="text-2xl font-serif text-pink-200">સંગાથે</p>
+                <p class="text-3xl serif-font text-pink-400 italic">weds</p>
                 
-                <h3 class="text-4xl font-bold border-y-2 border-gold/40 py-4 my-6 bg-white/5">ચિ. ક્વિના</h3>
+                <div class="relative py-4">
+                   <div class="absolute inset-0 bg-pink-100 blur-xl rounded-full opacity-50"></div>
+                   <h3 class="text-4xl md:text-5xl font-bold border-y-2 border-pink-200 py-6 my-6 bg-white/40 relative z-10 serif-font text-pink-900">ચિ. ક્વિના</h3>
+                </div>
                 
-                <p class="leading-relaxed"><span class="font-bold text-gold text-2xl">શ્રી દિવ્યેશભાઈ બાબુભાઈ ઢાકી (જૈન)</span> <br>
+                <p class="leading-relaxed"><span class="font-bold text-pink-800 text-2xl">શ્રી દિવ્યેશભાઈ બાબુભાઈ ઢાકી (જૈન)</span> <br>
                 તથા <br>
-                <span class="font-bold text-gold text-2xl">અ.સૌ. વર્ષાબેન દિવ્યેશભાઈ ઢાકી</span> <br>
+                <span class="font-bold text-pink-800 text-2xl">અ.સૌ. વર્ષાબેન દિવ્યેશભાઈ ઢાકી</span> <br>
                 ની સુપુત્રી સાથે</p>
             </div>
-            <div class="mt-8 pt-6 border-t border-gold/20">
-                <p class="text-pink-100">તો આ શુભ પ્રસંગે નવદંપતીને આર્શીવાદ આપવા પધારી શોભામાં અભિવૃધ્ધી કરશોજી.</p>
+            <div class="mt-10 pt-8 border-t-2 border-pink-100">
+                <p class="text-pink-600 text-lg leading-relaxed font-semibold">"સ્નેહના સંબંધોની આ મંગલ ઘડીમાં, નવદંપતીને આર્શીવાદ આપવા પધારી શોભામાં અભિવૃધ્ધી કરશોજી."</p>
             </div>
         </section>
 
         <!-- Schedule Section -->
-        <section class="reveal-section card-container">
-            <h4 class="text-gold text-2xl font-bold border-b-2 border-gold/30 pb-3 mb-6 uppercase tracking-wider">માંગલિક પ્રસંગો</h4>
-            <div class="text-left space-y-5 text-lg">
-                <div class="text-center font-bold bg-white/10 p-3 rounded-lg text-gold border border-gold/30 mb-6">
-                    શનિવાર, ૨૧/૦૨/૨૦૨૬
+        <section class="reveal-section card-container overflow-hidden">
+            <div class="absolute -right-10 -top-10 text-8xl opacity-5 rotate-12">🔔</div>
+            <h4 class="text-pink-700 text-3xl font-bold border-b-2 border-pink-200 pb-4 mb-8 uppercase tracking-widest serif-font">માંગલિક પ્રસંગો</h4>
+            <div class="text-left space-y-6 text-lg">
+                <div class="text-center font-bold bg-pink-100 p-4 rounded-xl text-pink-800 border border-pink-200 mb-8 shadow-sm">
+                    ✨ શનિવાર, ૨૧/૦૨/૨૦૨૬ ✨
                 </div>
-                <div class="grid grid-cols-2 gap-y-4 px-4">
-                    <span class="text-pink-100">🌸 માટલી:</span> <span class="text-right font-bold text-gold">૦૯:૩૦ AM</span>
-                    <span class="text-pink-100">🌸 મંડપ મુહુર્ત:</span> <span class="text-right font-bold text-gold">૧૦:૦૦ AM</span>
-                    <span class="text-pink-100">🌸 પીઠી:</span> <span class="text-right font-bold text-gold">૧૧:૦૦ AM</span>
-                    <span class="text-pink-100">🌸 ગ્રહશાંતિ:</span> <span class="text-right font-bold text-gold">૦૩:૦૦ PM</span>
-                    <span class="text-pink-100">🍽️ પ્રીતિ ભોજન:</span> <span class="text-right font-bold text-gold">૧૨:૦૦ & ૦૬:૦૦</span>
+                <div class="grid grid-cols-2 gap-y-4 px-6 relative z-10">
+                    <span class="text-pink-600 flex items-center gap-2">🌸 માટલી</span> <span class="text-right font-bold text-pink-900">૦૯:૩૦ AM</span>
+                    <span class="text-pink-600 flex items-center gap-2">🌸 મંડપ મુહુર્ત</span> <span class="text-right font-bold text-pink-900">૧૦:૦૦ AM</span>
+                    <span class="text-pink-600 flex items-center gap-2">🌸 પીઠી (ઊઠી)</span> <span class="text-right font-bold text-pink-900">૧૧:૦૦ AM</span>
+                    <span class="text-pink-600 flex items-center gap-2">🌸 ગ્રહશાંતિ</span> <span class="text-right font-bold text-pink-900">૦૩:૦૦ PM</span>
+                    <span class="text-pink-700 flex items-center gap-2 font-bold bg-pink-50 p-1 rounded">🍽️ પ્રીતિ ભોજન</span> <span class="text-right font-bold text-pink-900 bg-pink-50 p-1 rounded">૧૨:૦૦ & ૦૬:૦૦</span>
                 </div>
-                <div class="mt-8 pt-6 border-t-2 border-gold/30">
-                    <p class="font-bold text-gold flex items-center gap-2 mb-2">📍 શુભ સ્થળ:</p>
-                    <p class="italic leading-relaxed text-pink-50">માઁ ફાર્મ, ગુજરાતી સ્કુલ સામે, મું. પો. ઉંડેરા, તા. જી. વડોદરા.</p>
-                    <div class="mt-6 text-center">
-                        <a href="https://www.google.com/maps/search/Ma+Farm+Undera+Vadodara" target="_blank" class="inline-block bg-white text-pink-900 px-6 py-2 rounded-full font-bold shadow-lg hover:bg-gold hover:text-white transition">📍 મેપ જુઓ</a>
+                <div class="mt-10 pt-8 border-t-2 border-pink-100">
+                    <p class="font-bold text-pink-700 flex items-center gap-2 mb-4 text-xl">📍 શુભ સ્થળ</p>
+                    <p class="italic leading-relaxed text-pink-900 text-lg bg-white/60 p-4 rounded-lg border border-pink-200">માઁ ફાર્મ, ગુજરાતી સ્કુલ સામે, મું. પો. ઉંડેરા, તા. જી. વડોદરા.</p>
+                    <div class="mt-8 text-center">
+                        <a href="https://www.google.com/maps/search/Ma+Farm+Undera+Vadodara" target="_blank" class="nav-btn inline-block text-base shadow-lg">📍 લાઈવ લોકેશન જુઓ</a>
                     </div>
                 </div>
             </div>
@@ -219,40 +339,63 @@
 
         <!-- Family Section -->
         <section class="reveal-section card-container">
-            <h4 class="text-gold text-2xl font-bold mb-6 border-b border-gold/30 pb-2">સ્નેહાધીન & દર્શનાભિલાષી</h4>
-            <div class="grid md:grid-cols-2 gap-6 text-base text-left">
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-pink-50">
-                    <h5 class="text-gold font-bold mb-4 border-b border-gold/20">- સ્નેહાધીન -</h5>
-                    <p class="mb-2">પટેલ જશભાઈ ઈશ્વરભાઇ</p>
-                    <p class="mb-2">પટેલ દિશાંતભાઈ રતિલાલ</p>
-                    <p class="mb-2">પટેલ બંકીમભાઈ અશોકભાઈ</p>
-                    <p>પટેલ મેહુલ રમણભાઈ</p>
-                    <p class="mt-4 font-bold text-gold">સ્વ. વિઠ્ઠલભાઇ પટેલ પરિવાર</p>
+            <h4 class="text-pink-700 text-2xl font-bold mb-8 border-b border-pink-200 pb-4 serif-font">સ્નેહાધીન & દર્શનાભિલાષી</h4>
+            <div class="grid md:grid-cols-2 gap-8 text-lg text-left">
+                <div class="bg-white/60 p-6 rounded-2xl border border-pink-100 text-pink-900 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-pink-100/50 rounded-bl-full"></div>
+                    <h5 class="text-pink-700 font-bold mb-4 border-b border-pink-200 pb-2">- સ્નેહાધીન -</h5>
+                    <ul class="space-y-2">
+                        <li>પટેલ જશભાઈ ઈશ્વરભાઇ</li>
+                        <li>પટેલ દિશાંતભાઈ રતિલાલ</li>
+                        <li>પટેલ બંકીમભાઈ અશોકભાઈ</li>
+                        <li>પટેલ મેહુલ રમણભાઈ</li>
+                        <li class="mt-4 font-bold text-pink-800 border-t border-pink-200 pt-2">સ્વ. વિઠ્ઠલભાઇ પટેલ પરિવાર</li>
+                    </ul>
                 </div>
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10 text-pink-50">
-                    <h5 class="text-gold font-bold mb-4 border-b border-gold/20">- દર્શનાભિલાષી -</h5>
-                    <p class="mb-2">અ.સૌ. પટેલ દિપીકાબેન</p>
-                    <p class="mb-2">અ.સૌ. પટેલ જયશ્રીબેન</p>
-                    <p class="mb-2">અ.સૌ. પટેલ સોનલબેન</p>
-                    <p>ગં.સ્વ. પટેલ જયશ્રીબેન</p>
+                <div class="bg-white/60 p-6 rounded-2xl border border-pink-100 text-pink-900 shadow-md relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-pink-100/50 rounded-bl-full"></div>
+                    <h5 class="text-pink-700 font-bold mb-4 border-b border-pink-200 pb-2">- દર્શનાભિલાષી -</h5>
+                    <ul class="space-y-2">
+                        <li>અ.સૌ. પટેલ દિપીકાબેન</li>
+                        <li>અ.સૌ. પટેલ જયશ્રીબેન</li>
+                        <li>અ.સૌ. પટેલ સોનલબેન</li>
+                        <li>ગં.સ્વ. પટેલ જયશ્રીબેન</li>
+                    </ul>
                 </div>
             </div>
-            <div class="ornament-line mt-10"></div>
-            <p class="italic text-xl text-pink-200 mt-4">"નિમંત્રણ તો આપ્યું છે સ્નેહના ભાવથી, પધારજો તમે સપરિવાર વ્હાલથી."</p>
+            <div class="ornament-line mt-12"></div>
+            <p class="italic text-2xl text-pink-700 mt-6 font-serif">"નિમંત્રણ તો આપ્યું છે સ્નેહના ભાવથી,<br>પધારજો તમે સપરિવાર વ્હાલથી."</p>
         </section>
 
-        <footer class="text-center py-10 opacity-60 text-xs">
-            &copy; ૨૦૨૬ પટેલ પરિવાર - કોયલી (વડોદરા)
+        <footer class="text-center py-16 opacity-60 text-sm tracking-widest text-pink-800">
+            જય શ્રી કૃષ્ણ • ૨૦૨૬ પટેલ પરિવાર - કોયલી (વડોદરા)
         </footer>
     </main>
 
     <script>
+        // Create Floating Petals
+        const petalContainer = document.getElementById('petal-container');
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.width = Math.random() * 15 + 10 + 'px';
+            petal.style.height = petal.style.width;
+            petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+            petalContainer.appendChild(petal);
+            
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+        setInterval(createPetal, 400);
+
         function openKankotri() {
             document.getElementById('kankotri-cover').classList.add('opened');
             setTimeout(() => {
                 document.getElementById('kankotri-cover').style.display = 'none';
                 document.getElementById('main-content').classList.remove('hidden');
-                document.body.style.overflowY = 'auto'; // Enable scrolling
+                document.body.style.overflowY = 'auto';
                 triggerAnimations();
             }, 1500);
         }
@@ -269,7 +412,6 @@
             document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
         }
 
-        // On load, ensure page doesn't scroll
         window.onload = () => {
             window.scrollTo(0,0);
         }
